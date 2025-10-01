@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for {{ job_title }}</title>
+</head>
+
+<body>
+    <h1>Applying for: {{ job_title }}</h1>
+    <p>{{ job_description }}</p>
+
+    <form method="post" action="{{ url_for('apply') }}">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email:</label>
+        <form type="email" id="email" name="email" required>
+
+            <button type="submit">Submit Application</button>
+        </form>
+</body>
+
+</html>

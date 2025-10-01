@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Application Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f0fe;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin: 10px 0;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .back-btn:hover {
+            background-color: #e65c00;
+        }
+
+        .resume-info {
+            font-size: 15px;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Application Submitted Successfully!</h1>
+        <p>Thank you, <strong>{{ name }}</strong>.</p>
+
+        <div class="application-info">
+            <h2>Applied for: {{ job_title if job_title else 'Not Provided' }}</h2>
+            <p><strong>Requirements:</strong> {{ requirements if requirements else 'Not Provided' }}</p>
+        </div>
+
+        {% if filename %}
+        <p class="resume-info"><strong>Uploaded Resume:</strong> {{ filename }}</p>
+        {% endif %}
+
+        <p>We will review your application and contact you soon.</p>
+        <a href="{{ url_for('index') }}" class="back-btn">Back to Home</a>
+    </div>
+
+</body>
+
+</html>

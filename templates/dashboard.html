@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 3rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .job-card {
+            background: white;
+            color: #333;
+            padding: 25px;
+            border-radius: 15px;
+            width: 300px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .job-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2575fc;
+            margin-bottom: 10px;
+        }
+
+        .job-description,
+        .job-requirements {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background: linear-gradient(to right, #28a745, #218838);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .apply-btn:hover {
+            background: linear-gradient(to right, #218838, #28a745);
+        }
+
+        .logout-link {
+            display: block;
+            text-align: center;
+            margin-top: 50px;
+            color: #fff;
+            text-decoration: underline;
+            font-size: 1rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Job Dashboard</h1>
+
+    <div class="dashboard">
+        {% for job in jobs %}
+        <div class="job-card">
+            <div class="job-title">{{ job[1] }}</div>
+            <div class="job-description"><strong>Description:</strong> {{ job[2] }}</div>
+            <div class="job-requirements"><strong>Requirements:</strong> {{ job[3] }}</div>
+            <!-- <a href="{{ url_for('apply', job_id=job[0]) }}" class="apply-btn">Apply Now</a> -->
+            <a href="{{ url_for('apply', job_id=job[0], job_title=job[1]) }}"><button>Apply Now</button></a>
+
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+
+</body>
+
+</html>
