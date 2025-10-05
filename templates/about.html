@@ -1,13 +1,305 @@
-<!DOCTYPE html>
-<html lang="en">
+<section id="about" class="about-section">
+    <div class="about-glass">
+        <div class="about-header">
+            <span class="about-icon">
+                <svg height="46" viewBox="0 0 48 48" width="46" fill="#00d4ff">
+                    <circle cx="24" cy="24" r="20" fill="url(#grad)" />
+                    <defs>
+                        <radialGradient id="grad" cx="50%" cy="50%" r="100%" fx="50%" fy="50%">
+                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.6" />
+                            <stop offset="100%" style="stop-color:#657eea;stop-opacity:0" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+            </span>
+            <h2>About Our Job Portal</h2>
+        </div>
+        <p>
+            Welcome to <strong>NeoJobs</strong>—the newest way to launch your career, connect with top employers, and find freshly posted jobs tailored for you.<br>
+            Our platform delivers a LinkedIn-like experience with dashing design and intuitive navigation, empowering job seekers to discover, apply, and succeed faster.
+        </p>
+        <div class="quick-stats">
+            <div>
+                <div class="stat-number">10,000+</div>
+                <div class="stat-label">Active Jobs</div>
+            </div>
+            <div>
+                <div class="stat-number">2,300+</div>
+                <div class="stat-label">Hiring Companies</div>
+            </div>
+            <div>
+                <div class="stat-number">95%</div>
+                <div class="stat-label">User Satisfaction</div>
+            </div>
+            <div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Instant Updates</div>
+            </div>
+        </div>
+        <div class="about-features">
+            <div>
+                <i class="fas fa-bolt"></i> <b>Seamless Applications</b>
+                <div class="feature-desc">Apply instantly to the freshest jobs, with saved preferences for a smoother process.</div>
+            </div>
+            <div>
+                <i class="fas fa-users"></i> <b>Profile Builder</b>
+                <div class="feature-desc">Create a professional profile that stands out and gets noticed by recruiters.</div>
+            </div>
+            <div>
+                <i class="fas fa-briefcase"></i> <b>Smart Search</b>
+                <div class="feature-desc">Filter roles by title, skills, location, and company to match your unique aspirations.</div>
+            </div>
+            <div>
+                <i class="fas fa-bell"></i> <b>Real-Time Alerts</b>
+                <div class="feature-desc">Never miss an opportunity—receive instant notifications for new jobs that fit you.</div>
+            </div>
+            <div>
+                <i class="fas fa-chart-line"></i> <b>Career Tracking</b>
+                <div class="feature-desc">Monitor your applications and get feedback, all from a personalized dashboard.</div>
+            </div>
+            <div>
+                <i class="fas fa-lock"></i> <b>Privacy & Security</b>
+                <div class="feature-desc">Your data is safe with us. We use enterprise-grade security standards for every user and employer.</div>
+            </div>
+        </div>
+        <div class="testimonial-section">
+            <h3>What Our Users Say</h3>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <i class="fas fa-user-circle"></i>
+                    <p>"NeoJobs helped me land my dream job in just three days—amazing!"</p>
+                    <span>- Priya S., Data Analyst</span>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-user-circle"></i>
+                    <p>"The application process is lightning fast. I love the modern dashboard."</p>
+                    <span>- Rahul M., Software Developer</span>
+                </div>
+                <div class="testimonial-card">
+                    <i class="fas fa-user-circle"></i>
+                    <p>"Getting instant job notifications gave me a huge edge. Highly recommended!"</p>
+                    <span>- Aarti K., Marketing Manager</span>
+                </div>
+            </div>
+        </div>
+        <div class="about-action-large">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Browse New Jobs Now</a>
+            <a href="{{ url_for('register') }}" class="btn btn-outline">Create Your Profile</a>
+        </div>
+        <div style="margin-top:38px;color:#d8eaff;font-size:1rem;text-align:center;">
+            Looking to hire? <a href="{{ url_for('add_job') }}" style="color:#00d4ff;text-decoration:underline;">Post a Job</a>
+        </div>
+    </div>
+</section>
 
-<head>
-    <meta charset="utf-8">
-    <title>title</title>
-</head>
+<style>
+.about-section {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+    background: linear-gradient(120deg, #667eea 0%, #0f2027 70%, #00d4ff 120%);
+    position: relative;
+}
+.about-glass {
+    background: rgba(255,255,255,0.10);
+    box-shadow: 0 14px 38px rgba(0,224,255,0.20);
+    border-radius: 26px;
+    padding: 56px 42px 32px 42px;
+    max-width: 900px;
+    margin: 0 20px;
+    backdrop-filter: blur(16px);
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+}
+.about-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+.about-header h2 {
+    font-size: 2.2rem;
+    color: #00d4ff;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #00d4ff 50%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.about-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+}
+.about-glass p {
+    font-size: 1.18rem;
+    color: #e6f2ff;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+.quick-stats {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 24px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+.quick-stats > div {
+    background: rgba(0, 224, 255, 0.13);
+    border-radius: 10px;
+    padding: 16px 26px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(102,126,234,0.07);
+    min-width: 100px;
+}
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00d4ff;
+    margin-bottom: 6px;
+}
+.stat-label {
+    font-size: 1rem;
+    color: #e6f2ff;
+    font-weight: 500;
+}
 
-<body>
-    <h1> hello this is about section</h1>
-</body>
+.about-features {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    justify-content: center;
+}
+.about-features div {
+    background: rgba(255,255,255,0.13);
+    border-radius: 13px;
+    padding: 20px 18px;
+    min-width: 170px;
+    max-width: 230px;
+    box-shadow: 0 4px 18px rgba(102,126,234,0.12);
+    transition: box-shadow 0.23s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom:10px;
+}
+.about-features div:hover {
+    box-shadow: 0 8px 22px #00d4ff49;
+}
+.about-features i {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: #00d4ff;
+}
+.feature-desc {
+    font-size: 0.99rem;
+    color: #dbebff;
+    line-height: 1.5;
+}
 
-</html>
+.testimonial-section {
+    margin: 40px 0 22px 0;
+    text-align: center;
+}
+.testimonial-section h3 {
+    background: linear-gradient(90deg, #00d4ff, #9c5eff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.35rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+.testimonial-cards {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+.testimonial-card {
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(102,126,234,0.13);
+    padding: 18px 19px;
+    min-width: 180px;
+    max-width: 280px;
+    color: #f0faff;
+}
+.testimonial-card i {
+    font-size: 2.1rem;
+    color: #00d4ff;
+    margin-bottom: 10px;
+}
+.testimonial-card span {
+    font-size: 0.95rem;
+    color: #00d4ff;
+    margin-top: 10px;
+    display: block;
+}
+
+.about-action-large {
+    text-align: center;
+    margin-top: 38px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.btn {
+    padding: 13px 32px;
+    border-radius: 30px;
+    background: linear-gradient(90deg,#00d4ff,#764ba2);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 2px 10px #657eeaaa;
+    transition: background 0.3s, transform 0.3s;
+    border: none;
+}
+.btn:hover {
+    background: linear-gradient(90deg,#764ba2,#00d4ff);
+    transform: translateY(-3px);
+}
+.btn-outline {
+    background: transparent;
+    border: 2px solid #00d4ff;
+    color: #00d4ff;
+}
+.btn-outline:hover {
+    background: #00d4ff;
+    color: #fff;
+    box-shadow: 0 0 22px #00d4ff77;
+}
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(32px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+@media (max-width:1040px){
+    .about-glass {max-width:98vw;}
+    .about-features div {max-width:99vw;}
+}
+
+@media (max-width: 715px) {
+    .about-glass {
+        padding: 22px 3px 13px 3px;
+    }
+    .about-header h2 {
+        font-size: 1.19rem;
+    }
+    .quick-stats {gap: 7px;}
+    .about-features{
+        flex-direction:column;
+        gap: 11px;
+    }
+    .testimonial-cards{flex-direction:column;gap:10px;}
+    .about-action-large{flex-direction:column;gap:13px;}
+}
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />

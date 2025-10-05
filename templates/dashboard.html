@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,98 +12,118 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e1f29, #2f3542);
             color: #fff;
+            min-height: 100vh;
             padding: 40px 20px;
+            overflow-x: hidden;
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 40px;
             font-size: 3rem;
-            animation: fadeInDown 1s ease;
+            margin-bottom: 60px;
+            background: linear-gradient(90deg, #00e0ff, #0074f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeDown 1s ease;
         }
 
         .dashboard {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
         }
 
         .job-card {
-            background: white;
-            color: #333;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             padding: 25px;
-            border-radius: 15px;
-            width: 300px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 0.8s ease both;
+            width: 320px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 20px rgba(0, 255, 255, 0.1);
+            transform: scale(0.95);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
+        .job-card:nth-child(odd) { animation-delay: 0.2s; }
+        .job-card:nth-child(even) { animation-delay: 0.4s; }
+
         .job-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
         }
 
         .job-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2575fc;
+            color: #00d4ff;
+            font-size: 1.6rem;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .job-description,
         .job-requirements {
-            margin-bottom: 15px;
             font-size: 0.95rem;
+            margin-bottom: 12px;
         }
 
         .apply-btn {
             display: inline-block;
-            background: linear-gradient(to right, #28a745, #218838);
+            background: linear-gradient(90deg, #00d4ff, #0074f9);
+            border: none;
             color: white;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-size: 0.95rem;
+            padding: 12px 20px;
+            border-radius: 10px;
             font-weight: bold;
-            text-decoration: none;
-            transition: background 0.3s ease;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px #00d4ff;
         }
 
         .apply-btn:hover {
-            background: linear-gradient(to right, #218838, #28a745);
+            background: linear-gradient(90deg, #0074f9, #00d4ff);
+            box-shadow: 0 0 25px #00d4ff;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         .logout-link {
             display: block;
             text-align: center;
-            margin-top: 50px;
-            color: #fff;
-            text-decoration: underline;
+            margin-top: 60px;
+            color: #00d4ff;
             font-size: 1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .logout-link:hover {
+            color: #fff;
+            text-shadow: 0 0 8px #00e0ff;
         }
 
         @keyframes fadeInUp {
             from {
+                transform: translateY(40px) scale(0.9);
                 opacity: 0;
-                transform: translateY(30px);
             }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
 
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -119,7 +138,6 @@
         }
     </style>
 </head>
-
 <body>
 
     <h1>Job Dashboard</h1>
@@ -130,10 +148,9 @@
             <div class="job-title">{{ job[1] }}</div>
             <div class="job-description"><strong>Description:</strong> {{ job[2] }}</div>
             <div class="job-requirements"><strong>Requirements:</strong> {{ job[3] }}</div>
-            <!-- <a href="{{ url_for('apply', job_id=job[0]) }}" class="apply-btn">Apply Now</a> -->
-            <a href="{{ url_for('apply', job_id=job[0], job_title=job[1]) }}"><button>Apply Now</button></a>
-
-
+            <a href="{{ url_for('apply', job_id=job[0], job_title=job[1]) }}">
+                <button class="apply-btn">Apply Now</button>
+            </a>
         </div>
         {% endfor %}
     </div>
@@ -141,5 +158,4 @@
     <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
 
 </body>
-
 </html>

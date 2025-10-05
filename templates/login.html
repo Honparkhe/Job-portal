@@ -1,160 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Form</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
     <style>
         body {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e1f29, #28304e, #11121b);
             height: 100vh;
-            margin: 0;
-
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
+        /* Floating glowing circles */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 224, 255, 0.3) 0%, transparent 70%);
+            animation: float 10s infinite linear;
+        }
+
+        .circle:nth-child(1) {
+            width: 250px; height: 250px;
+            top: 10%; left: 15%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 400px; height: 400px;
+            bottom: 5%; right: 10%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+            100% { transform: translateY(0) rotate(360deg); opacity: 0.8; }
+        }
+
+        /* Login Card */
         .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 224, 255, 0.2);
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            color: white;
+            z-index: 2;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
         }
 
         .card-header {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: white;
             text-align: center;
-            padding: 20px;
-            border-radius: 15px 15px 0 0;
+            margin-bottom: 25px;
         }
 
         .card-header h2 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .card-body {
-            padding: 30px;
-        }
-
-        .form-floating {
-            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00e0ff, #9c5eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
         .form-floating input {
             border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+        }
+
+        .form-floating input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 10px rgba(0, 224, 255, 0.3);
         }
 
         .form-floating label {
-            color: #666;
+            color: #aaa;
         }
 
         .password-toggle {
             position: absolute;
-            right: 10px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
+            color: #aaa;
             cursor: pointer;
-            color: #666;
         }
 
         .btn-primary {
             width: 100%;
-            padding: 10px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
             border: none;
-            font-size: 16px;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #00e0ff, #0074f9);
+            box-shadow: 0 0 10px rgba(0, 224, 255, 0.4);
+            font-weight: 600;
+            padding: 10px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            background: linear-gradient(90deg, #0074f9, #00e0ff);
+            box-shadow: 0 0 20px rgba(0, 224, 255, 0.7);
+            transform: translateY(-2px);
         }
 
         .register-link {
             text-align: center;
             margin-top: 15px;
+            color: #ccc;
         }
 
         .register-link a {
-            color: #6a11cb;
+            color: #00e0ff;
             text-decoration: none;
+            transition: color 0.3s;
         }
 
-
-
         .register-link a:hover {
-            text-decoration: underline;
+            color: #fff;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
 
 <body>
+    <!-- Floating Circles -->
+    <div class="circle"></div>
+    <div class="circle"></div>
 
     <div class="card">
-        <!-- Card Header -->
         <div class="card-header">
             <h2>Welcome Back!</h2>
+            <p style="color:#aaa; font-size:0.95rem;">Log in to continue</p>
         </div>
 
-        <!-- Card Body -->
         <div class="card-body">
             <form action="/login" method="POST">
-                <!-- Email Field -->
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
                     <label for="email">Email address</label>
                 </div>
 
-                <!-- Password Field -->
                 <div class="form-floating mb-3 position-relative">
-                    <input type="password" class="form-control" id="password" placeholder="Enter password"
-                        name="password" required>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
                     <label for="password">Password</label>
-                    <span class="password-toggle" onclick="togglePassword()">
-                        <i class="fas fa-eye"></i>
-                    </span>
+                    <span class="password-toggle" onclick="togglePassword()"><i class="fas fa-eye"></i></span>
                 </div>
 
-                <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary">Log In</button>
 
-                <!-- Register Link -->
                 <div class="register-link">
-                    <p>Don't have an account? <a href="/register">Register</a></p>
+                    <p>Don’t have an account? <a href="/register">Register</a></p>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS for Password Toggle -->
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.querySelector('.password-toggle i');
-
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
+                toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
             } else {
                 passwordInput.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
+                toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
             }
         }
     </script>
 </body>
-
 </html>

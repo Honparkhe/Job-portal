@@ -1,162 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Post a Job</title>
     <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Body and Background */
-        body,
-        html {
+        body, html {
             height: 100%;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at 20% 60%, #667eea 0%, #764ba2 70%, #1b1b2f 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #333;
+            overflow-x: hidden;
+        }
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.14) 0%, transparent 70%);
+            animation: float 12s infinite linear;
+            pointer-events: none;
+        }
+        .circle:nth-child(1) {
+            width: 190px; height: 190px;
+            top: 18%; left: 6%;
+            animation-delay: 0s;
+        }
+        .circle:nth-child(2) {
+            width: 300px; height: 300px;
+            bottom: 9%; right: 7%;
+            animation-delay: 2.5s;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.55; }
+            50% { transform: translateY(-22px) rotate(180deg); opacity: 0.28; }
+            100% { transform: translateY(0) rotate(360deg); opacity: 0.55; }
         }
 
-        /* Form Container */
         .form-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.10);
+            box-shadow: 0 8px 28px rgba(118, 75, 162, 0.32);
+            border-radius: 18px;
+            padding: 44px 36px;
             width: 100%;
             max-width: 600px;
-            animation: fadeIn 1s ease-in-out;
+            z-index: 2;
+            color: #2c5364;
+            animation: fadeInUp 1.1s ease forwards;
+            opacity: 0;
         }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .form-container h1 {
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #333;
+            font-size: 2rem;
             text-align: center;
-            font-weight: bold;
-            animation: slideIn 1s ease-in-out;
+            margin-bottom: 28px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #667eea, #9c5eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideInFromLeft 0.8s ease forwards;
         }
-
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Labels */
         .form-container label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #444;
             font-size: 16px;
+            display: block;
         }
-
-        /* Input Fields */
         .form-container input[type="text"],
         .form-container textarea {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            color: #333;
-            box-sizing: border-box;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            padding: 12px 13px;
+            margin-bottom: 19px;
+            border: 1.5px solid #764ba275;
+            border-radius: 7px;
+            font-size: 15.5px;
+            color: #261c2c;
+            background: #ffffffec;
+            box-shadow: 0 2px 6px rgba(118, 75, 162, 0.07);
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
-
         .form-container input[type="text"]:focus,
         .form-container textarea:focus {
             border-color: #667eea;
-            box-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 8px #667eea55;
+            background: #ffffff;
             outline: none;
         }
-
         .form-container textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
-
-        /* Button */
         .form-container button {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            border-radius: 10px;
             border: none;
-            border-radius: 8px;
             font-size: 18px;
             font-weight: bold;
+            background: linear-gradient(90deg, #667eea, #9c5eff);
+            color: #fff;
             cursor: pointer;
-            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 14px rgba(102, 126, 234, 0.25);
+            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+            margin-top: 6px;
         }
-
         .form-container button:hover {
-            background: linear-gradient(135deg, #764ba2, #667eea);
+            background: linear-gradient(90deg, #9c5eff, #667eea);
+            box-shadow: 0 0 22px #667eea99;
             transform: translateY(-3px);
         }
 
-        .form-container button:active {
-            transform: translateY(0);
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(28px);}
+            100% { opacity: 1; transform: translateY(0);}
         }
-
-        /* Responsive Design */
+        @keyframes slideInFromLeft {
+            0% { opacity: 0; transform: translateX(-32px);}
+            100% { opacity: 1; transform: translateX(0);}
+        }
         @media (max-width: 768px) {
             .form-container {
-                padding: 20px;
+                padding: 20px 6px;
+                max-width: 98vw;
             }
-
             .form-container h1 {
-                font-size: 24px;
+                font-size: 1.4rem;
             }
-
             .form-container input[type="text"],
             .form-container textarea {
                 font-size: 14px;
-                padding: 10px;
-            }
-
-            .form-container button {
-                font-size: 16px;
-                padding: 12px;
+                padding: 9px;
             }
         }
     </style>
 </head>
-
 <body>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
     <div class="form-container">
         <h1>Post a Job</h1>
         <form action="{{ url_for('add_job') }}" method="post">
             <label for="job_title">Job Title:</label>
-            <input type="text" id="job_title" name="job_title" required>
+            <input type="text" id="job_title" name="job_title" required />
 
             <label for="job_description">Job Description:</label>
             <textarea id="job_description" name="job_description" required></textarea>
@@ -168,5 +157,4 @@
         </form>
     </div>
 </body>
-
 </html>
