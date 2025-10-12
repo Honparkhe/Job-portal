@@ -1,88 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Application Confirmation</title>
+    <title>Application Submitted</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e8f0fe;
-            margin: 0;
-            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
+        .glass-container {
+            background: rgba(34, 40, 49, 0.85);
+            box-shadow: 0 8px 40px 0 rgba(0,0,0,0.5);
+            border-radius: 18px;
+            padding: 48px 38px 38px 38px;
+            max-width: 440px;
             text-align: center;
+            backdrop-filter: blur(7px);
+            border: 2px solid rgba(255,255,255,0.18);
+        }
+
+        .tick {
+            font-size: 56px;
+            color: #21e6c1;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 6px #21e6c1aa);
+            animation: pop 0.8s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+
+        @keyframes pop {
+           0% { transform: scale(0.6);}
+           60% { transform: scale(1.2);}
+           100% { transform: scale(1);}
         }
 
         h1 {
-            color: #28a745;
-            margin-bottom: 20px;
+            color: #21e6c1;
+            margin-bottom: 14px;
+            font-size: 2rem;
+            letter-spacing: 1px;
         }
 
-        h2 {
-            color: #333;
-            margin: 10px 0;
+        .wave {
+            color: #ff2e63;
+            font-size: 1.5rem;
+            margin-right: 7px;
         }
 
-        p {
-            color: #555;
-            font-size: 16px;
-            margin-bottom: 15px;
+        .username {
+            color: #fafafa;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .job-title {
+            color: #fff;
+            margin-top: 22px;
+            font-size: 1.25rem;
+            background: linear-gradient(90deg, #21e6c1, #ff2e63);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .requirements, .resume-info {
+            margin-top: 12px;
+            color: #c7c7c7;
+            font-size: 1rem;
+        }
+
+        .resume-info strong,
+        .requirements strong {
+            color: #21e6c1;
+            font-weight: 600;
+        }
+
+        .confirmation-message {
+            color: #fafafa;
+            margin-top: 20px;
+            margin-bottom: 14px;
+            font-size: 1.1rem;
         }
 
         .back-btn {
+            margin-top: 26px;
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #ff6600;
-            color: white;
+            padding: 11px 28px;
+            font-size: 1.1rem;
+            background: linear-gradient(90deg, #21e6c1, #ff2e63);
+            color: #232931;
+            border-radius: 7px;
+            border: none;
             text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s ease-in-out;
+            font-weight: 600;
+            transition: filter 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(33,230,193,0.22), 0 2px 8px rgba(255,46,99,0.13);
         }
 
         .back-btn:hover {
-            background-color: #e65c00;
+            filter: brightness(0.92);
+            box-shadow: 0 1px 4px #21e6c165;
         }
 
-        .resume-info {
-            font-size: 15px;
-            color: #333;
-            margin-top: 10px;
+        @media (max-width:500px){
+            .glass-container{
+                padding: 30px 10px 24px 10px;
+            }
         }
     </style>
 </head>
-
 <body>
-
-    <div class="container">
-        <h1>Application Submitted Successfully!</h1>
-        <p>Thank you, <strong>{{ name }}</strong>.</p>
-
-        <div class="application-info">
-            <h2>Applied for: {{ job_title if job_title else 'Not Provided' }}</h2>
-            <p><strong>Requirements:</strong> {{ requirements if requirements else 'Not Provided' }}</p>
+    <div class="glass-container">
+        <div class="tick">✔️</div>
+        <h1>Application Submitted!</h1>
+        <div>
+            <span class="wave">👋</span>
+            <span class="username">Thank you, <strong>{{ name }}</strong>.</span>
         </div>
-
+        <div class="job-title">
+            {{ job_title if job_title else 'Role Not Provided' }}
+        </div>
+        <div class="requirements">
+            <strong>Requirements:</strong> {{ requirements if requirements else 'Not Provided' }}
+        </div>
         {% if filename %}
-        <p class="resume-info"><strong>Uploaded Resume:</strong> {{ filename }}</p>
+        <div class="resume-info">
+            <strong>Uploaded Resume:</strong> {{ filename }}
+        </div>
         {% endif %}
-
-        <p>We will review your application and contact you soon.</p>
+        <div class="confirmation-message">
+            We will review your application and reach out to you soon!
+        </div>
         <a href="{{ url_for('index') }}" class="back-btn">Back to Home</a>
     </div>
-
 </body>
-
 </html>

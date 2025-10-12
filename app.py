@@ -148,45 +148,64 @@ def add_job():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
 @app.route("/apply", methods=["GET", "POST"])
 @login_required
 def apply():
     job_id = request.args.get('job_id')
     job_title = request.args.get('job_title')
 
+    # Fetch job requirements (description)
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT requirements FROM jobs WHERE id = %s", (job_id,))
+    cursor.execute("SELECT description, requirements FROM jobs WHERE id = %s", (job_id,))
     job_data = cursor.fetchone()
     cursor.close()
 
-    requirements = job_data[0] if job_data else "Not specified"
+    job_description = job_data[0] if job_data else "No description available"
+    requirements = job_data[1] if job_data else "Not specified"
 
+    # When page is loaded (GET)
     if request.method == "GET":
-        # Store job_title and requirements in session
+        session['job_id'] = job_id
         session['job_title'] = job_title
+        session['job_description'] = job_description
         session['requirements'] = requirements
         return render_template("apply.html", job_title=job_title, requirements=requirements)
 
-    # POST request — get stored values from session
+    # When form is submitted (POST)
+    job_id = session.get('job_id')
     job_title = session.get('job_title')
-    requirements = session.get('requirements')
+    job_description = session.get('job_description')
 
     name = request.form['name']
     email = request.form['email']
     dob = request.form['dob']
     mobile = request.form['mobile']
 
+    # Handle file upload
     if 'resume' not in request.files:
         flash("No resume file uploaded!", "danger")
         return redirect(request.url)
 
     file = request.files['resume']
+    resume_path = None
+
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
+        resume_path = filename  
 
+   
+    cursor = mysql.connection.cursor()
+    cursor.execute("""
+        INSERT INTO applications 
+        (user_id, job_id, name, email, dob, mobile, resume, job_title, job_description)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (current_user.id, job_id, name, email, dob, mobile, resume_path, job_title, job_description))
+    mysql.connection.commit()
+    cursor.close()
+
+    flash("Your application has been submitted successfully!", "success")
 
     return render_template("confirmation.html", job_title=job_title, name=name, requirements=requirements)
 

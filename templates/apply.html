@@ -3,123 +3,38 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Apply for {{ job_title }}</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
         body {
-            font-family: "Segoe UI", sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
             margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        .container {
-            background: #fff;
-            padding: 30px 35px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.8s ease-in-out;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #444;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="date"],
-        input[type="file"] {
+        .glass-container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 40px 35px;
+            max-width: 480px;
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            transition: all 0.3s ease;
-            font-size: 15px;
+            color: #e0f7fa;
+            animation: fadeInUp 0.9s ease forwards;
         }
 
-        input:focus {
-            border-color: #2575fc;
-            box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
-            outline: none;
-        }
-
-        .resume-upload {
-            border: 2px dashed #888;
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .resume-upload input[type="file"] {
-            opacity: 0;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            cursor: pointer;
-        }
-
-        .resume-text {
-            margin-top: 8px;
-            font-size: 13px;
-            color: #777;
-            font-style: italic;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            background: linear-gradient(to right, #28a745, #218838);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(to right, #218838, #28a745);
-        }
-
-        .back-btn {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            color: #2575fc;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        @keyframes fadeIn {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(40px);
             }
 
             to {
@@ -127,16 +42,141 @@
                 transform: translateY(0);
             }
         }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: #00e5ff;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 1.1px;
+            text-shadow: 0 0 5px #00e5ffaa;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #b2ebf2;
+            text-shadow: 0 0 2px #006064bb;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="file"] {
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            color: #004d40;
+            background: #b2dfdb;
+            box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.15);
+            outline: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus {
+            background: #80cbc4;
+            box-shadow: 0 0 10px #00acc1;
+            color: #00332c;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .resume-upload {
+            position: relative;
+            background: transparent;
+            border: 2px dashed #00bfa5;
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: center;
+            color: #4dd0e1;
+            font-style: italic;
+            font-weight: 600;
+            transition: border-color 0.3s ease;
+        }
+
+        .resume-upload:hover {
+            border-color: #00e5ff;
+        }
+
+        .resume-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .resume-text {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #b2ebf2;
+        }
+
+        .submit-btn {
+            padding: 14px;
+            background: linear-gradient(90deg, #00e5ff, #00bfa5);
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #004d40;
+            cursor: pointer;
+            box-shadow: 0 6px 20px -5px #00e5ffaa;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(90deg, #00bfa5, #00e5ff);
+            box-shadow: 0 6px 28px -5px #00bfa5cc;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 24px;
+            text-align: center;
+            color: #00bfa5;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #00e5ff;
+        }
+
+        @media (max-width: 480px) {
+            .glass-container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 
 <body>
-
-    <div class="container">
+    <div class="glass-container">
         <h1>Apply for {{ job_title }}</h1>
-
         <form action="{{ url_for('apply', job_id=request.args.get('job_id'), job_title=job_title) }}" method="POST"
-            enctype="multipart/form-data">
+            enctype="multipart/form-data" novalidate>
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required />
@@ -161,15 +201,13 @@
                 <label>Resume (PDF only)</label>
                 <label class="resume-upload">
                     Click to Upload Resume
-                    <input type="file" name="resume" accept="application/pdf" required
-                        onchange="updateFileName(this)" />
+                    <input type="file" name="resume" accept="application/pdf" required onchange="updateFileName(this)" />
                 </label>
                 <p class="resume-text" id="file-name">Accepted format: PDF only</p>
             </div>
 
             <button type="submit" class="submit-btn">Submit Application</button>
         </form>
-
         <a href="{{ url_for('application') }}" class="back-btn">← Back to Job Listings</a>
     </div>
 
@@ -179,7 +217,6 @@
             document.getElementById("file-name").textContent = `Selected: ${fileName}`;
         }
     </script>
-
 </body>
 
 </html>
